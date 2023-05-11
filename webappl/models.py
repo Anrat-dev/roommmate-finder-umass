@@ -16,7 +16,7 @@ class Profile(models.Model):
         self.save()
 
     def __str__(self):
-        return self.title
+        return self.userid
     
 GENDER_CHOICES = (
         ('Male', 'Male'),
@@ -32,7 +32,7 @@ COLLEGE = (
         ('College of Information and Sciences', 'CICS'),
         ('Other', 'other')
 )
-MAJOR = (
+YEAR = (
         ('Freshman', 'Freshman'),
         ('Sophomore', 'Sophomore'),
         ('Junior', 'Junior'),
