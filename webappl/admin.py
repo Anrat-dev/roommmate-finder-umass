@@ -1,6 +1,6 @@
 from django.contrib import admin
-from .models import Preferences, Profile
+from .models import Profile, Request
 # Register your models here.
 
-admin.site.register(Preferences)
 admin.site.register(Profile)
+admin.site.register(Request)
