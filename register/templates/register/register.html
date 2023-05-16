@@ -10,6 +10,14 @@
 {% endblock %}
 
 {% block content %}
+<header id="header">
+    <div class="inner">
+        <a href="#" class="image avatar"><img src="static/media/avatar.jpg" alt="" /></a>
+        <h1><strong>Roommate Finder </strong>UMass Amherst<br />
+        one place for all student housing needs<br />
+        crafted by <a href="#">CODENAME</a>.</h1>
+    </div>
+</header> 
     <form method="POST" class="form-group">
         {% csrf_token %}
         {{form}}
