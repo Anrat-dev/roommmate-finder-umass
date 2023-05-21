@@ -180,9 +180,9 @@ HOUSING = (
 )
 
 class Profile(models.Model):
-        userid = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+        userid = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
         phno = models.CharField(max_length=10)
-        profile_picture = models.ImageField(upload_to='profile_pictures/')
+        profile_picture = models.ImageField()
         gender = models.CharField(max_length=25, choices=GENDER, default=GENDER[0][0])
         level_of_study = models.CharField(max_length=25, choices=LEVEL_OF_STUDY, default=LEVEL_OF_STUDY[0][0])
         year = models.CharField(max_length=25, choices=YEAR, default=YEAR[0][0])

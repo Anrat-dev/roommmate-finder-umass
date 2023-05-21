@@ -1,3 +1,6 @@
+from django.shortcuts import render
+from .forms import ProfileForm
+
 # Create your views here.
 from django.shortcuts import render
 from django.db.models.query import QuerySet
@@ -11,6 +14,9 @@ def profile_page(request):
     p = Profile.objects.get(userid=current_user)
 
     return render(request, 'webappl/profile_page.html', {'current_user':current_user,
+                                                         'first_name':current_user.first_name,
+                                                         'last_name':current_user.last_name,
+                                                         'email':current_user.email,
                                                          'phno':p.phno,
                                                          'gender':p.get_gender_display(),
                                                          'level_of_study':p.get_level_of_study_display(),
@@ -23,6 +29,26 @@ def profile_page(request):
                                                          'duration':p.get_duration_display(),
                                                          'start_season':p.get_start_season_display(),
                                                          'housing':p.get_housing_display()})
+
+def edit_profile_page(request):
+    try:
+        profile = request.user.profile
+        form = ProfileForm(instance=profile)
+        if request.method == 'POST':
+            form = ProfileForm(request.POST, request.FILES, instance=profile)
+            if form.is_valid:
+                form.save()
+    except:
+        form = ProfileForm()
+        if request.method == 'POST':
+            form = ProfileForm(request.POST, request.FILES)
+            form.instance.userid = request.user = request.user
+            if form.is_valid:
+                form.save()
+    return render(request, 'webappl/edit_profile.html', {'form':form})
+
+def search_page(request):
+    return render(request, 'webappl/edit_profile.html', {})
 
 def search_page(request):
     current_user = request.user
