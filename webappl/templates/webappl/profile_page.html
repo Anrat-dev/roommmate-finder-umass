@@ -1,13 +1,16 @@
+
 {% extends "webappl/base.html" %}
+{% load static %}
+
 {% block title %}
-    <title>Roommate Finder</title>
+    <title>Profile Page</title>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-    <link rel="stylesheet" href="static/css/main.css" />
-{% endblock %}
-		
+    <link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}">
+    {% endblock %}
+
 {% block content %}
-<!-- Header -->
+Header
     <header id="header">
         <div class="inner">
             <a href="#" class="image avatar"><img src="static/media/avatar.jpg" alt="" /></a>
@@ -16,16 +19,152 @@
             crafted by <a href="#">CODENAME</a>.</h1>
         </div>
     </header>
-    {{current_user}}
-    {{gender}}
-    {{level_of_study}}
-    {{year}}
-    {{college}}
-    {{program}}
-    {{sleep_habit}}
-    {{cleanliness}}
-    {{social_habit}}
-    {{duration}}
-    {{start_season}}
-    {{housing}}
+
+<!-- Main -->
+    <div id="main">
+
+        <!-- One -->
+        <section id="one">
+            <header class="major">
+                <h2>{{current_user}}<br />
+                magna sed accumsan arcu neque.</h2>
+            </header>
+            <p>Accumsan orci faucibus id eu lorem semper. Eu ac iaculis ac nunc nisi lorem vulputate lorem neque cubilia ac in adipiscing in curae lobortis tortor primis integer massa adipiscing id nisi accumsan pellentesque commodo blandit enim arcu non at amet id arcu magna. Accumsan orci faucibus id eu lorem semper nunc nisi lorem vulputate lorem neque cubilia.</p>
+            <ul class="actions">
+                <li><a href="#" class="button">Learn More</a></li>
+            </ul>
+        </section>
+
+        <!-- Two -->
+        <section id="two">
+            <h2>Personal Information</h2>
+            <div class="row">
+                <article class="col-6 col-12-xsmall work-item">
+                    <!-- <a href="static/media/fulls/01.jpg" class="image fit thumb"><img src="static/media/thumbs/01.jpg" alt="" /></a> -->
+                    <h3>Phone Number</h3>
+                    <p>Lorem ipsum dolor sit amet nisl sed nullam feugiat.</p>
+                </article>
+                <article class="col-6 col-12-xsmall work-item">
+                    <!-- <a href="static/media/fulls/02.jpg" class="image fit thumb"><img src="static/media/thumbs/02.jpg" alt="" /></a> -->
+                    <h3>Gender</h3>
+                    <p>Lorem ipsum dolor sit amet nisl sed nullam feugiat.</p>
+                </article>
+                <article class="col-6 col-12-xsmall work-item">
+                    <!-- <a href="static/media/fulls/03.jpg" class="image fit thumb"><img src="static/media/thumbs/03.jpg" alt="" /></a> -->
+                    <h3>Level of Study</h3>
+                    <p>Lorem ipsum dolor sit amet nisl sed nullam feugiat.</p>
+                </article>
+                <article class="col-6 col-12-xsmall work-item">
+                    <!-- <a href="static/media/fulls/04.jpg" class="image fit thumb"><img src="static/media/thumbs/04.jpg" alt="" /></a> -->
+                    <h3>Year</h3>
+                    <p>Lorem ipsum dolor sit amet nisl sed nullam feugiat.</p>
+                </article>
+                <article class="col-6 col-12-xsmall work-item">
+                    <!-- <a href="static/media/fulls/05.jpg" class="image fit thumb"><img src="static/media/thumbs/05.jpg" alt="" /></a> -->
+                    <h3>College</h3>
+                    <p>Lorem ipsum dolor sit amet nisl sed nullam feugiat.</p>
+                </article>
+                <article class="col-6 col-12-xsmall work-item">
+                    <!-- <a href="static/media/fulls/06.jpg" class="image fit thumb"><img src="static/media/thumbs/06.jpg" alt="" /></a> -->
+                    <h3>Program</h3>
+                    <p>Lorem ipsum dolor sit amet nisl sed nullam feugiat.</p>
+                </article>
+                <article class="col-6 col-12-xsmall work-item">
+                    <!-- <a href="static/media/fulls/06.jpg" class="image fit thumb"><img src="static/media/thumbs/06.jpg" alt="" /></a> -->
+                    <h3>Sleep Habbits</h3>
+                    <p>Lorem ipsum dolor sit amet nisl sed nullam feugiat.</p>
+                </article>
+                <article class="col-6 col-12-xsmall work-item">
+                    <!-- <a href="static/media/fulls/06.jpg" class="image fit thumb"><img src="static/media/thumbs/06.jpg" alt="" /></a> -->
+                    <h3>Cleanliness</h3>
+                    <p>Lorem ipsum dolor sit amet nisl sed nullam feugiat.</p>
+                </article>
+                <article class="col-6 col-12-xsmall work-item">
+                    <!-- <a href="static/media/fulls/06.jpg" class="image fit thumb"><img src="static/media/thumbs/06.jpg" alt="" /></a> -->
+                    <h3>Social Habits</h3>
+                    <p>Lorem ipsum dolor sit amet nisl sed nullam feugiat.</p>
+                </article>
+                <article class="col-6 col-12-xsmall work-item">
+                    <!-- <a href="static/media/fulls/06.jpg" class="image fit thumb"><img src="static/media/thumbs/06.jpg" alt="" /></a> -->
+                    <h3>Duration</h3>
+                    <p>Lorem ipsum dolor sit amet nisl sed nullam feugiat.</p>
+                </article>
+                <article class="col-6 col-12-xsmall work-item">
+                    <!-- <a href="static/media/fulls/06.jpg" class="image fit thumb"><img src="static/media/thumbs/06.jpg" alt="" /></a> -->
+                    <h3>Start Session</h3>
+                    <p>Lorem ipsum dolor sit amet nisl sed nullam feugiat.</p>
+                </article>
+                <article class="col-6 col-12-xsmall work-item">
+                    <!-- <a href="static/media/fulls/06.jpg" class="image fit thumb"><img src="static/media/thumbs/06.jpg" alt="" /></a> -->
+                    <h3>Housing</h3>
+                    <p>Lorem ipsum dolor sit amet nisl sed nullam feugiat.</p>
+                </article>
+            </div>
+            <ul class="actions">
+                <li><a href="#" class="button">Full Portfolio</a></li>
+            </ul>
+        </section>
+
+        <!-- Three -->
+        <section id="three">
+            <h2>Get In Touch</h2>
+            <p>Accumsan pellentesque commodo blandit enim arcu non at amet id arcu magna. Accumsan orci faucibus id eu lorem semper nunc nisi lorem vulputate lorem neque lorem ipsum dolor.</p>
+            <div class="row">
+                <div class="col-8 col-12-small">
+                    <form method="post" action="#">
+                        <div class="row gtr-uniform gtr-50">
+                            <div class="col-6 col-12-xsmall"><input type="text" name="name" id="name" placeholder="Name" /></div>
+                            <div class="col-6 col-12-xsmall"><input type="email" name="email" id="email" placeholder="Email" /></div>
+                            <div class="col-12"><textarea name="message" id="message" placeholder="Message" rows="4"></textarea></div>
+                        </div>
+                    </form>
+                    <ul class="actions">
+                        <li><input type="submit" value="Send Message" /></li>
+                    </ul>
+                </div>
+                <div class="col-4 col-12-small">
+                    <ul class="labeled-icons">
+                        <li>
+                            <h3 class="icon solid fa-home"><span class="label">Address</span></h3>
+                            1234 Somewhere Rd.<br />
+                            Nashville, TN 00000<br />
+                            United States
+                        </li>
+                        <li>
+                            <h3 class="icon solid fa-mobile-alt"><span class="label">Phone</span></h3>
+                            000-000-0000
+                        </li>
+                        <li>
+                            <h3 class="icon solid fa-envelope"><span class="label">Email</span></h3>
+                            <a href="#">hello@untitled.tld</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+    </div>
+
+<!-- Footer -->
+    <!-- <footer id="footer">
+        <div class="inner">
+            <ul class="icons">
+                <li><a href="#" class="icon brands fa-twitter"><span class="label">Twitter</span></a></li>
+                <li><a href="#" class="icon brands fa-github"><span class="label">Github</span></a></li>
+                <li><a href="#" class="icon brands fa-dribbble"><span class="label">Dribbble</span></a></li>
+                <li><a href="#" class="icon solid fa-envelope"><span class="label">Email</span></a></li>
+            </ul>
+            <ul class="copyright">
+                <li>&copy; Untitled</li><li>Design: <a href="#">CODENAME</a></li>
+            </ul>
+        </div>
+    </footer> -->
+
+<!-- Scripts -->
+    <script src="static/js/jquery.min.js"></script>
+    <script src="static/js/jquery.poptrox.min.js"></script>
+    <script src="static/js/browser.min.js"></script>
+    <script src="static/js/breakpoints.min.js"></script>
+    <script src="static/js/util.js"></script>
+    <script src="static/js/main.js"></script>
 {% endblock %}

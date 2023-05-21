@@ -27,43 +27,31 @@ Header
         <!-- One -->
         <section id="one">
             <header class="major">
-                <h2>Register/Signup<br />
-                magna sed accumsan arcu neque.</h2>
+                <h2>Login in to continue <br />
+                <!-- magna sed accumsan arcu neque. -->
+            </h2>
             </header>
-            <p>Already have an account? Login to continue</p>
-            <ul class="actions">
-                <li><a href="#" class="button">Login</a></li>
-            </ul>
         </section>
 
     <!-- Two -->
-            <section id="two">
+            <section id="one">
                 <form method="POST" class="form-group">
                     {{form}}
                     {% csrf_token %}
                     <!-- <button type="submit" class="btn btn-success">Register</button> -->
-                    
+                    <br>
                     <ul class="actions">
-                        <li><input type="submit" value="Create Account" /></li>
+                        <li><input type="submit" value="Login" /></li>
                     </ul>
                 </form>
+                <br><br>
+                <p>Don't have an account? Let's get you started</p>
+                <ul class="actions">
+                    <li><a href="/register" class="button">Create Account</a></li>
+                </ul>
             </section>
     </div>
 
-<!-- Footer -->
-<!-- <footer id="footer">
-    <div class="inner">
-        <ul class="icons">
-            <li><a href="#" class="icon brands fa-twitter"><span class="label">Twitter</span></a></li>
-            <li><a href="#" class="icon brands fa-github"><span class="label">Github</span></a></li>
-            <li><a href="#" class="icon brands fa-dribbble"><span class="label">Dribbble</span></a></li>
-            <li><a href="#" class="icon solid fa-envelope"><span class="label">Email</span></a></li>
-        </ul>
-        <ul class="copyright">
-            <li>&copy; Untitled</li><li>Design: <a href="#">CODENAME</a></li>
-        </ul>
-    </div>
-</footer> -->
 
 <!-- Scripts -->
 <script src="static/js/jquery.min.js"></script>
