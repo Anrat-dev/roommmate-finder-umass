@@ -208,8 +208,8 @@ STATUS = (
 class Request(models.Model):
         requesterid = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='requesterid')
         recipientid = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='recipientid')
-        staus = models.CharField(max_length=25, choices=STATUS, default=STATUS[0][0])
+        status = models.CharField(max_length=25, choices=STATUS, default=STATUS[0][0])
         date_sent = models.DateField(default=timezone.now)
 
         def __str__(self):
-                return f"requester: {self.requesterid}, recipient: {self.requesterid}, status: {self.status}"
+                return f"requester: {self.requesterid}, recipient: {self.recipientid}, status: {self.status}"

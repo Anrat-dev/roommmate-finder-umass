@@ -19,7 +19,7 @@
                     </header>
                     <p>username : {{current_user}}<br>email : {{email}}</p>
                     <!-- <p><img src="{% static 'media/thumbs/01.jpg' %}"></p> -->
-                    <p><img style="width:15em;" src="{{request.user.profile.profile_picture.url}}"></p>
+                    <p><img style="width:15em;" src="{{current_user.profile.profile_picture.url}}"></p>
                 </section>
             
         </div>
@@ -96,9 +96,15 @@
                     <p>{{housing}}</p>
                 </article>
             </div>
+            {% if user.username is current_user.username %}
             <ul class="actions">
-                <li><a href="#" class="button">Edit Profile</a></li>
+                <li><a href="{%url 'edit_profile_page' %}" class="button">Edit Profile</a></li>
             </ul>
+            {% else %}
+            <ul class="actions">
+                <li><a href="{%url 'home_page' %}" class="button">Request Contact</a></li>
+            </ul>
+            {% endif %}
         </section>
 
     </div>

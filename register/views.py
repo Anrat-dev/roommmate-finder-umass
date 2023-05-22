@@ -9,7 +9,12 @@ def register(response):
         form = RegisterForm(response.POST)
         if form.is_valid():
             form.save()
-        return redirect("/")
+            new_user = authenticate(username=form.cleaned_data['username'],
+                                    password=form.cleaned_data['password1'],
+                                    )
+            login(response, new_user)
+            return redirect("/edit_profile_page")
+        # return redirect("/edit_profile_page")
     else:
         form = RegisterForm()
 

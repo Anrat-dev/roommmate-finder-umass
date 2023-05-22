@@ -1,15 +1,35 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from .forms import ProfileForm
+from django.contrib.auth.models import User
 
 # Create your views here.
 from django.shortcuts import render
 from django.db.models.query import QuerySet
-from webappl.models import Profile
+from webappl.models import Profile, Request
 
 def home_page(request):
     return render(request, 'webappl/home_page.html', {})
 
-def profile_page(request):
+def profile_page(request, pk=None):
+    if pk:
+        p = Profile.objects.get(pk=pk)
+        user = User.objects.get(username = p.userid.username)
+        return render(request, 'webappl/profile_page.html', {'current_user':user,
+                                                         'first_name':user.first_name,
+                                                         'last_name':user.last_name,
+                                                         'email':user.email,
+                                                         'phno':"**********",
+                                                         'gender':p.get_gender_display(),
+                                                         'level_of_study':p.get_level_of_study_display(),
+                                                         'year':p.get_year_display(), 
+                                                         'college':p.get_college_display(),
+                                                         'program':p.get_program_display(),
+                                                         'sleep_habit':p.get_sleep_habit_display(),
+                                                         'cleanliness':p.get_cleanliness_display(),
+                                                         'social_habit':p.get_social_habit_display(),
+                                                         'duration':p.get_duration_display(),
+                                                         'start_season':p.get_start_season_display(),
+                                                         'housing':p.get_housing_display()})
     current_user = request.user
     p = Profile.objects.get(userid=current_user)
 
@@ -38,6 +58,7 @@ def edit_profile_page(request):
             form = ProfileForm(request.POST, request.FILES, instance=profile)
             if form.is_valid:
                 form.save()
+                return redirect("/profile_page")
     except:
         form = ProfileForm()
         if request.method == 'POST':
@@ -45,6 +66,7 @@ def edit_profile_page(request):
             form.instance.userid = request.user = request.user
             if form.is_valid:
                 form.save()
+                return redirect("/profile_page")
     return render(request, 'webappl/edit_profile.html', {'form':form})
 
 def search_page(request):
@@ -66,3 +88,7 @@ def search_page(request):
     sorted_profiles = [profile for profile, _ in sorted_profiles_scores]
 
     return render(request, 'webappl/search_page.html', {'profiles':sorted_profiles})
+
+def contacts(request):
+    contact_list = Request.objects.filter(requesterid=request.user)
+    return render(request, 'webappl/contacts.html', {'contact_list':contact_list})
