@@ -14,7 +14,11 @@
 			<ul style="display: flex;list-style: none;">
 			  <li style="padding-left: 1rem; "><a style="text-decoration: none;color: #870000" href="#">Profile Page</a></li>
 			  <li style="padding-left: 1rem; "><a style="text-decoration: none;color: #870000" href="#">Search Page</a></li>
-			  <li style="padding-left: 1rem; "><a style="text-decoration: none;color: #870000" href="#">Login/Logout</a></li>
+			  {% if user.is_authenticated %}
+			  <li style="padding-left: 1rem; "><a style="text-decoration: none;color: #870000" href="#">Logout</a></li>
+			  {% else %}
+			  <li style="padding-left: 1rem; "><a style="text-decoration: none;color: #870000" href="#">Login</a></li>
+			  {% endif %}
 			</ul>
 		  </nav>
 
