@@ -1,55 +1,61 @@
 {% extends "webappl/base.html" %}
 {% load static %}
+{% load bootstrap4 %}
 
 {% block title %}
-    <title>Create an Account</title>
+    <title>Search for Roommates</title>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
     <link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}">
-    
-    {% endblock %}
-
+{% endblock %}
 
 {% block content %}
-
 <header id="header">
     <div class="inner">
-        <h1><strong>Roommate Finder </strong>UMass Amherst<br />
-        one place for all student housing needs<br />
-        crafted by <a href="">CODENAME</a>.</h1>
+
+
     </div>
 </header>
 
 <!-- Main -->
-    <div id="main">
-        <!-- One -->
-        <section id="one">
-            <header class="major">
-                <h2>Search page</h2>
-            </header>
-        </section>
+<div id="main">
+                <!-- One -->
+    <section id="one">
+        <header class="major">
+            <h2>Search page</h2>
+        </header>
+
+        <!-- Filter form -->
+        <form method="GET" class="form-inline my-2 my-lg-0">
+            {% bootstrap_form filter.form layout='inline' %}
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+        </form>
+    </section>
+
+
     <!-- Two -->
     <section id="two">
         <div class="row">
-            {% for profile in profiles %}
+            {% for profile in filter.qs %}
             <article class="col-6 col-12-xsmall work-item">
                 <img style="width: 15em; height:10em;" src="{{profile.profile_picture.url}}" alt="" />
                 <a href="{% url 'profile_page_with_pk' pk=profile.pk %}"> <h3>{{profile.userid.first_name}} {{profile.userid.last_name}}</h3></a>
-               
                 <p>{{profile.program}}<br>{{profile.year}} <br>{{profile.gender}}</p>
             </article>
+            {% empty %}
+                <div class="col-12">
+                    <p>No profiles found</p>
+                </div>
             {% endfor %}
         </div>
-        
     </section>
-    </div>
-
+</div>
 
 <!-- Scripts -->
-<script src="static/js/jquery.min.js"></script>
-<script src="static/js/jquery.poptrox.min.js"></script>
-<script src="static/js/browser.min.js"></script>
-<script src="static/js/breakpoints.min.js"></script>
-<script src="static/js/util.js"></script>
-<script src="static/js/main.js"></script>
+<script src="{% static 'js/jquery.min.js' %}"></script>
+<script src="{% static 'js/jquery.poptrox.min.js' %}"></script>
+<script src="{% static 'js/browser.min.js' %}"></script>
+<script src="{% static 'js/breakpoints.min.js' %}"></script>
+<script src="{% static 'js/util.js' %}"></script>
+<script src="{% static 'js/main.js' %}"></script>
 {% endblock %}

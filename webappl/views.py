@@ -7,6 +7,10 @@ from django.shortcuts import render
 from django.db.models.query import QuerySet
 from webappl.models import Profile, Request
 
+
+from django.shortcuts import render
+from .filters import ProfileFilter
+
 def home_page(request):
     return render(request, 'webappl/home_page.html', {})
 
@@ -69,17 +73,24 @@ def edit_profile_page(request):
                 return redirect("/profile_page")
     return render(request, 'webappl/edit_profile.html', {'form':form})
 
+
 def search_page(request):
     current_user = request.user
     current_profile = current_user.profile
     all_profiles = Profile.objects.all()
+
+    # Create the filter
+    profile_filter = ProfileFilter(request.GET, queryset=all_profiles.exclude(userid=current_user))
+
+    # Apply the filter to the profiles
+    filtered_profiles = profile_filter.qs
 
     # Get the field names of the Profile model excluding 'userid', 'phno', and 'profile_picture'
     profile_fields = [field.name for field in Profile._meta.get_fields()][2:]
 
     # Compute a match score for each profile excluding the current user
     scores = {}
-    for profile in Profile.objects.exclude(userid=current_user):
+    for profile in filtered_profiles:
         score = sum(getattr(profile, field) == getattr(current_profile, field) for field in profile_fields)
         scores[profile] = score
 
@@ -87,7 +98,7 @@ def search_page(request):
     sorted_profiles_scores = sorted(scores.items(), key=lambda x: x[1], reverse=True)
     sorted_profiles = [profile for profile, _ in sorted_profiles_scores]
 
-    return render(request, 'webappl/search_page.html', {'profiles':sorted_profiles})
+    return render(request, 'webappl/search_page.html', {'profiles': sorted_profiles, 'filter': profile_filter})
 
 def contacts(request, pk=None):
     if pk:
@@ -98,3 +109,7 @@ def contacts(request, pk=None):
 
     contact_list = Request.objects.filter(requesterid=request.user)
     return render(request, 'webappl/contacts.html', {'contact_list':contact_list})
+
+def search(request):
+    filter = ProfileFilter(request.GET, queryset=Profile.objects.all())
+    return render(request, 'search.html', {'filter': filter})
