@@ -1,7 +1,6 @@
-from django.shortcuts import render
-
 # Create your views here.
 from django.shortcuts import render
+from django.db.models.query import QuerySet
 from webappl.models import Profile
 
 def home_page(request):
@@ -11,7 +10,6 @@ def profile_page(request):
     current_user = request.user
     p = Profile.objects.get(userid=current_user)
 
-    # print current_user.id
     return render(request, 'webappl/profile_page.html', {'current_user':current_user,
                                                          'phno':p.phno,
                                                          'gender':p.get_gender_display(),
@@ -25,3 +23,29 @@ def profile_page(request):
                                                          'duration':p.get_duration_display(),
                                                          'start_season':p.get_start_season_display(),
                                                          'housing':p.get_housing_display()})
+
+def search_page(request):
+    current_user = request.user
+    current_profile = Profile.objects.get(userid=current_user)
+    all_profiles = Profile.objects.all()
+
+    # Get the field names of the Profile model excluding 'userid', 'phno', and 'profile_picture'
+    profile_fields = [field.name for field in Profile._meta.get_fields()][2:]
+
+    # Compute a match score for each profile excluding the current user
+    scores = {}
+    for profile in Profile.objects.exclude(userid=current_user):
+        score = sum(getattr(profile, field) == getattr(current_profile, field) for field in profile_fields)
+        scores[profile] = score
+
+    # Sort the profiles based on the scores in descending order
+    sorted_profiles_scores = sorted(scores.items(), key=lambda x: x[1], reverse=True)
+
+    for profile in sorted_profiles_scores:
+        print(str(profile[0].userid) + ", score" + str(profile[1]))
+
+    print("hello")
+
+    sorted_profiles = [profile for proile, _ in sorted_profiles_scores]
+
+    return render(request, 'webappl/search_page.html', {'profiles':sorted_profiles})
