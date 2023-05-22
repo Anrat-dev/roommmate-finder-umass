@@ -12,14 +12,14 @@
 {% block content %}
     <header id="header">
         <div class="inner">
-            <a href="#" class="image avatar"><img src="static/media/avatar.jpg" alt="" /></a>
             <h1><strong>Roommate Finder </strong>UMass Amherst<br /><br>
                 <section id="one">
                     <header class="major">
                         <h2>{{first_name}}  {{last_name}}<br /></h2>
                     </header>
                     <p>username : {{current_user}}<br>email : {{email}}</p>
-                    <p><img src="{% static 'media/thumbs/01.jpg' %}"></p>
+                    <!-- <p><img src="{% static 'media/thumbs/01.jpg' %}"></p> -->
+                    <p><img style="width:15em;" src="{{request.user.profile.profile_picture.url}}"></p>
                 </section>
             
         </div>
