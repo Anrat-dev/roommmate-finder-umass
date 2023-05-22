@@ -14,7 +14,7 @@
 			<ul style="display: flex;list-style: none;">
 			<li style="padding-left: 1rem; "><a style="text-decoration: none;color: #870000" href="{% url 'home_page' %}">Home</a></li>
 			{% if user.is_authenticated %}
-			  <li style="padding-left: 1rem; "><a style="text-decoration: none;color: #870000" href="{% url 'search_page' %}">Search Roomates</a></li>
+			  <li style="padding-left: 1rem; "><a style="text-decoration: none; color: #870000" href="{% url 'search_page' %}">Search Roommates</a></li>
 			  <li style="padding-left: 1rem; "><a style="text-decoration: none;color: #870000" href="{% url 'contacts' %}">My Contacts</a></li>
 			  <li style="padding-left: 1rem; "><a style="text-decoration: none;color: #870000" href="{% url 'profile_page' %}">My Profile</a></li>
 			  <li style="padding-left: 1rem; "><a style="text-decoration: none;color: #870000" href="{% url 'logout' %}">Logout</a></li>
