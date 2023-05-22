@@ -43,7 +43,8 @@ INSTALLED_APPS = [
     'webappl',
     'register',
     'bootstrap4',
-    'django_filters'
+    'django_filters',
+    'widget_tweaks',
 ]
 
 MIDDLEWARE = [

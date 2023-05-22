@@ -1,4 +1,7 @@
 import django_filters
+from django_filters.fields import forms
+from django_filters.filterset import forms
+# from django_filters.filters import for
 from .models import Profile
 
 class ProfileFilter(django_filters.FilterSet):
