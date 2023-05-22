@@ -48,11 +48,8 @@ def edit_profile_page(request):
     return render(request, 'webappl/edit_profile.html', {'form':form})
 
 def search_page(request):
-    return render(request, 'webappl/edit_profile.html', {})
-
-def search_page(request):
     current_user = request.user
-    current_profile = Profile.objects.get(userid=current_user)
+    current_profile = current_user.profile
     all_profiles = Profile.objects.all()
 
     # Get the field names of the Profile model excluding 'userid', 'phno', and 'profile_picture'
@@ -66,12 +63,6 @@ def search_page(request):
 
     # Sort the profiles based on the scores in descending order
     sorted_profiles_scores = sorted(scores.items(), key=lambda x: x[1], reverse=True)
-
-    for profile in sorted_profiles_scores:
-        print(str(profile[0].userid) + ", score" + str(profile[1]))
-
-    print("hello")
-
-    sorted_profiles = [profile for proile, _ in sorted_profiles_scores]
+    sorted_profiles = [profile for profile, _ in sorted_profiles_scores]
 
     return render(request, 'webappl/search_page.html', {'profiles':sorted_profiles})
