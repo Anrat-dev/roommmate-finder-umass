@@ -80,7 +80,7 @@ def search_page(request):
     all_profiles = Profile.objects.all()
 
     # Create the filter
-    profile_filter = ProfileFilter(request.GET, queryset=all_profiles.exclude(userid=current_user))
+    profile_filter = ProfileFilter(request.GET, queryset=all_profiles.exclude(userid=current_user).exclude(userid__in=User.objects.filter(is_active=False)))
 
     # Apply the filter to the profiles
     filtered_profiles = profile_filter.qs

@@ -12,10 +12,11 @@
 		<nav style="display: flex;justify-content:space-between; height: 4em;;padding: 1rem 2rem;background: #cfd8dc;">
 			<h2>Title</h2>
 			<ul style="display: flex;list-style: none;">
+			<li style="padding-left: 1rem; "><a style="text-decoration: none;color: #870000" href="{% url 'home_page' %}">Home</a></li>
 			{% if user.is_authenticated %}
-			  <li style="padding-left: 1rem; "><a style="text-decoration: none;color: #870000" href="{% url 'profile_page' %}">Profile Page</a></li>
-			  <li style="padding-left: 1rem; "><a style="text-decoration: none;color: #870000" href="{% url 'search_page' %}">Search Page</a></li>
-			  <li style="padding-left: 1rem; "><a style="text-decoration: none;color: #870000" href="{% url 'contacts' %}">Contacts</a></li>
+			  <li style="padding-left: 1rem; "><a style="text-decoration: none; color: #870000" href="{% url 'search_page' %}">Search Roommates</a></li>
+			  <li style="padding-left: 1rem; "><a style="text-decoration: none;color: #870000" href="{% url 'contacts' %}">My Contacts</a></li>
+			  <li style="padding-left: 1rem; "><a style="text-decoration: none;color: #870000" href="{% url 'profile_page' %}">My Profile</a></li>
 			  <li style="padding-left: 1rem; "><a style="text-decoration: none;color: #870000" href="{% url 'logout' %}">Logout</a></li>
 			{% else %}
 			  <li style="padding-left: 1rem; "><a style="text-decoration: none;color: #870000" href="{% url 'register' %}">Signup</a></li>
