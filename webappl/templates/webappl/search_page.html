@@ -24,7 +24,7 @@
         <header class="major">
             <h2>Search page</h2>
         </header>
-        {% if user.is_authenticated %}
+       
         <!-- Filter form -->
         <form method="GET" class="form-inline my-2 my-lg-0">
             {% bootstrap_form filter.form layout='inline' %}
@@ -49,12 +49,7 @@
             {% endfor %}
         </div>
     </section>
-    {% else %}
-            <p>You are not currently signed in. Please sign in to continue accessing this application</p>
-                <ul class="actions">
-                    <li><a href="/login" class="button">Login</a></li>
-                </ul>
-        {% endif %}
+    
         <!-- Three -->
 </div>
 
