@@ -17,8 +17,8 @@ def profile_page(request, pk=None):
         return render(request, 'webappl/profile_page.html', {'current_user':user,
                                                          'first_name':user.first_name,
                                                          'last_name':user.last_name,
-                                                         'email':user.email,
-                                                         'phno':"**********",
+                                                         'email':"*******@umass.edu",
+                                                         'phno':"##########",
                                                          'gender':p.get_gender_display(),
                                                          'level_of_study':p.get_level_of_study_display(),
                                                          'year':p.get_year_display(), 
@@ -89,6 +89,12 @@ def search_page(request):
 
     return render(request, 'webappl/search_page.html', {'profiles':sorted_profiles})
 
-def contacts(request):
+def contacts(request, pk=None):
+    if pk:
+        recipient = User.objects.get(pk=pk)
+        contact_obj = Request(requesterid=request.user, recipientid=recipient, status="PENDING")
+        contact_obj.save()
+        return redirect("/search_page")
+
     contact_list = Request.objects.filter(requesterid=request.user)
     return render(request, 'webappl/contacts.html', {'contact_list':contact_list})

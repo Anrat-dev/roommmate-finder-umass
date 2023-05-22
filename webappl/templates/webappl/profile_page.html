@@ -102,7 +102,7 @@
             </ul>
             {% else %}
             <ul class="actions">
-                <li><a href="{%url 'home_page' %}" class="button">Request Contact</a></li>
+                <li><a href="{% url 'contacts_with_pk' pk=current_user.pk %}" class="button">Request Contact</a></li>
             </ul>
             {% endif %}
         </section>

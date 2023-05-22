@@ -16,7 +16,7 @@
             <a href="/home_page" class="image avatar"><img src="{% static 'media/avatar.jpg}" alt="" /></a>
             <h1><strong>Roommate Finder </strong>UMass Amherst<br />
             one place for all student housing needs<br />
-            crafted by <a href="#">CODENAME</a>.</h1>
+            crafted by <a href="">CODENAME</a>.</h1>
         </div>
     </header>
 
@@ -26,6 +26,8 @@
         <!-- One -->
         <section id="one">
             {% for contact in contact_list %}
+                <img style="width:15em;" src="{{contact.recipientid.profile.profile_picture.url}}">
+                <!-- <img src="{{contact.recipientid.profile.phno}}" -->
                 <h3>{{contact.recipientid}}</h3>
                 <p>phno : {{contact.recipientid.profile.phno}}<br>
                     email : {{contact.recipientid.email}}

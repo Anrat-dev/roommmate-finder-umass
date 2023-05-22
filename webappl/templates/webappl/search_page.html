@@ -34,9 +34,9 @@
             {% for profile in profiles %}
             <article class="col-6 col-12-xsmall work-item">
                 <img style="width: 15em; height:10em;" src="{{profile.profile_picture.url}}" alt="" />
-                <a href="{% url 'profile_page_with_pk' pk=profile.pk %}"><h3>{{ profile }}</h3></a>
-                <h3>{{profile.userid.first_name}} {{profile.userid.last_name}}</h3>
-                <p>{{profile.gender}}</p>
+                <a href="{% url 'profile_page_with_pk' pk=profile.pk %}"> <h3>{{profile.userid.first_name}} {{profile.userid.last_name}}</h3></a>
+               
+                <p>{{profile.program}}<br>{{profile.year}} <br>{{profile.gender}}</p>
             </article>
             {% endfor %}
         </div>
