@@ -41,7 +41,9 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'webappl',
-    'register'
+    'register',
+    'django_filters',
+    'bootstrapform'
 ]
 
 MIDDLEWARE = [
