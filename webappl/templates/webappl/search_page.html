@@ -40,7 +40,7 @@
             <article class="col-6 col-12-xsmall work-item">
                 <img style="width: 15em; height:10em;" src="{{profile.profile_picture.url}}" alt="" />
                 <a href="{% url 'profile_page_with_pk' pk=profile.pk %}"> <h3>{{profile.userid.first_name}} {{profile.userid.last_name}}</h3></a>
-                <p>{{profile.program}}<br>{{profile.year}} <br>{{profile.gender}}</p>
+                <p>{{profile.get_gender_display}}<br>{{profile.get_year_display}} <br>{{profile.get_program_display}}</p>
             </article>
             {% empty %}
                 <div class="col-12">
