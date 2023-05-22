@@ -42,8 +42,6 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'webappl',
     'register',
-    'django_filters',
-    'bootstrapform'
 ]
 
 MIDDLEWARE = [
