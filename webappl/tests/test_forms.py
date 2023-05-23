@@ -1,13 +1,13 @@
 from django.test import TestCase
 from webappl.models import Profile
-from webappl.filters import ProfileForm
+from webappl.forms import ProfileForm
 from django.core.files.uploadedfile import SimpleUploadedFile
 from django.contrib.auth.models import User
 
 class ProfileFormTest(TestCase):
     def setUp(self):
         self.user = User.objects.create_user(
-            username='test_user1',
+            username='testuser',
             email='test@example.com',
             password='testpassword'
         )
