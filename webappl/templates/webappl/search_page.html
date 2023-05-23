@@ -16,7 +16,7 @@
 <header id="header", style="padding-top: 80px; padding-bottom: 100px;">
     <div class="inner", style = "overflow-y: auto; text-align: left;">
         <header class="minor" style="margin-top: -0.4em;">
-            <h2>Search page</h2>
+            <h3>Filter Roommates</h3>
         </header>
         <hr class="solid">
         <div style="overflow-y: scroll; height:540px;">
@@ -42,8 +42,8 @@
             {% for profile in filter.qs %}
             <article class="col-6 col-12-xsmall work-item">
                 <img style="width: 15em; height:10em;" src="{{profile.profile_picture.url}}" alt="" />
-                <a href="{% url 'profile_page_with_pk' pk=profile.pk %}" style="text-decoration: none; color: inherit;"><h3>{{profile.userid.first_name}} {{profile.userid.last_name}}</h3></a>
-                <p>{{profile.program}}<br>{{profile.year}} <br>{{profile.gender}}</p>
+                <a href="{% url 'profile_page_with_pk' pk=profile.pk %}" style="text-decoration: none; color: inherit;"><h3>{{profile.userid.first_name_display}} {{profile.userid.last_name_display}}</h3></a>
+                <p>{{profile.program_display}}<br>{{profile.year_display}} <br>{{profile.gender_display}}</p>
             </article>
             {% empty %}
                 <div class="col-12">
