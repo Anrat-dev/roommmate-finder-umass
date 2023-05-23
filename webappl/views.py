@@ -5,6 +5,7 @@ from django.contrib.auth.models import User
 # Create your views here.
 from django.shortcuts import render
 from django.db.models.query import QuerySet
+from django.db.models import Q
 from webappl.models import Profile, Request
 
 
@@ -103,12 +104,21 @@ def search_page(request):
 def contacts(request, pk=None):
     if pk:
         recipient = User.objects.get(pk=pk)
-        contact_obj = Request(requesterid=request.user, recipientid=recipient, status="PENDING")
+        contact_obj = Request(requesterid=request.user, recipientid=recipient, status="pending")
         contact_obj.save()
         return redirect("/search_page")
+    
+    current_user = request.user
 
-    contact_list = Request.objects.filter(requesterid=request.user)
-    return render(request, 'webappl/contacts.html', {'contact_list':contact_list})
+    sent_pending_list = Request.objects.filter(requesterid=current_user).filter(status='pending')
+    received_pending_list = Request.objects.filter(recipientid=current_user).filter(status='pending')
+    sent_accepted_list = Request.objects.filter(Q(requesterid=current_user) & Q(status='accepted'))
+    received_accepted_list = Request.objects.filter(Q(recipientid=current_user) & Q(status='accepted'))
+
+    return render(request, 'webappl/contacts.html', {'sent_pending_list':sent_pending_list,
+                                                     'received_pending_list':received_pending_list,
+                                                     'sent_accepted_list':sent_accepted_list,
+                                                     'received_accepted_list':received_accepted_list})
 
 def search(request):
     filter = ProfileFilter(request.GET, queryset=Profile.objects.all())

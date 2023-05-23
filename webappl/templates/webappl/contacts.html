@@ -25,7 +25,9 @@
 
         <!-- One -->
         <section id="one">
-            {% for contact in contact_list %}
+            <h2>Accepted Contacts</h2>
+            {% for contact in sent_accepted_list %}
+
                 <img style="width:15em;" src="{{contact.recipientid.profile.profile_picture.url}}">
                 <!-- <img src="{{contact.recipientid.profile.phno}}" -->
                 <h3>{{contact.recipientid}}</h3>
@@ -34,7 +36,39 @@
 
                 </p>
             {% endfor %}
-            </ul>
+
+            {% for contact in received_accepted_list %}
+
+                <img style="width:15em;" src="{{contact.requesterid.profile.profile_picture.url}}">
+                <!-- <img src="{{contact.recipientid.profile.phno}}" -->
+                <h3>{{contact.requesterid}}</h3>
+                <p>phno : {{contact.requesterid.profile.phno}}<br>
+                    email : {{contact.requesterid.email}}
+
+                </p>
+            {% endfor %}
+            
+            <h2>Received Pending Requests</h2>
+            {% for contact in received_pending_list %}
+                <img style="width:15em;" src="{{contact.requesterid.profile.profile_picture.url}}">
+                <!-- <img src="{{contact.recipientid.profile.phno}}" -->
+                <h3>{{contact.requesterid}}</h3>
+                <p>phno : {{contact.requesterid.profile.phno}}<br>
+                    email : {{contact.requesterid.email}}
+
+                </p>
+            {% endfor %}
+
+            <h2>Sent Pending Requests</h2>
+            {% for contact in sent_pending_list %}
+                <img style="width:15em;" src="{{contact.recipientid.profile.profile_picture.url}}">
+                <!-- <img src="{{contact.recipientid.profile.phno}}" -->
+                <h3>{{contact.recipientid}}</h3>
+                <p>phno : {{contact.recipientid.profile.phno}}<br>
+                    email : {{contact.recipientid.email}}
+
+                </p>
+            {% endfor %}
         </section>
 
     <!-- Two -->
