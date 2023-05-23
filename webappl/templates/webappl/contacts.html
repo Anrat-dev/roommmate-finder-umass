@@ -15,8 +15,8 @@
         <div class="inner">
             <a href="/home_page" class="image avatar"><img src="{% static 'media/avatar.jpg}" alt="" /></a>
             <h1><strong>Roommate Finder </strong>UMass Amherst<br />
-            one place for all student housing needs<br />
-            crafted by <a href="">CODENAME</a>.</h1>
+            A place to find potential roomates.<br />
+            Crafted by CODENAME.</h1>
         </div>
     </header>
 
@@ -30,9 +30,9 @@
 
                 <img style="width:15em;" src="{{contact.recipientid.profile.profile_picture.url}}">
                 <!-- <img src="{{contact.recipientid.profile.phno}}" -->
-                <h3>{{contact.recipientid}}</h3>
-                <p>phno : {{contact.recipientid.profile.phno}}<br>
-                    email : {{contact.recipientid.email}}
+                <h3>{{contact.recipientid.first_name}} {{contact.recipientid.last_name}}</h3>
+                <p>Phone Number : {{contact.recipientid.profile.phno}}<br>
+                    Email : {{contact.recipientid.email}}
 
                 </p>
             {% endfor %}
@@ -41,31 +41,30 @@
 
                 <img style="width:15em;" src="{{contact.requesterid.profile.profile_picture.url}}">
                 <!-- <img src="{{contact.recipientid.profile.phno}}" -->
-                <h3>{{contact.requesterid}}</h3>
-                <p>phno : {{contact.requesterid.profile.phno}}<br>
-                    email : {{contact.requesterid.email}}
+                <h3>{{contact.requesterid.first_name}} {{contact.requesterid.last_name}}</h3>
+                <p>Phone Number : {{contact.requesterid.profile.phno}}<br>
+                    Email : {{contact.requesterid.email}}
 
                 </p>
             {% endfor %}
-            
+         
             <h2>Received Pending Requests</h2>
             {% for contact in received_pending_list %}
                 <img style="width:15em;" src="{{contact.requesterid.profile.profile_picture.url}}">
                 <!-- <img src="{{contact.recipientid.profile.phno}}" -->
-                <h3>{{contact.requesterid}}</h3>
-                <p>phno : {{contact.requesterid.profile.phno}}<br>
-                    email : {{contact.requesterid.email}}
-
-                </p>
+                <h3>{{contact.requesterid.first_name}} {{contact.requesterid.last_name}}</h3>
+                <ul class="actions">
+                    <li><a href="{% url 'accept_contact' pk=contact.pk %}" class="button">Accept</a></li>
+                </ul>
             {% endfor %}
 
             <h2>Sent Pending Requests</h2>
             {% for contact in sent_pending_list %}
                 <img style="width:15em;" src="{{contact.recipientid.profile.profile_picture.url}}">
                 <!-- <img src="{{contact.recipientid.profile.phno}}" -->
-                <h3>{{contact.recipientid}}</h3>
-                <p>phno : {{contact.recipientid.profile.phno}}<br>
-                    email : {{contact.recipientid.email}}
+                <h3>{{contact.recipientid.first_name}} {{contact.recipientid.last_name}}</h3>
+                <p>Phone Number : Request Pending<br>
+                    Email : Request Pending
 
                 </p>
             {% endfor %}

@@ -120,6 +120,13 @@ def contacts(request, pk=None):
                                                      'sent_accepted_list':sent_accepted_list,
                                                      'received_accepted_list':received_accepted_list})
 
+def accept_contact(request, pk):
+    contact=Request.objects.get(pk=pk)
+    contact.status = 'accepted'
+    contact.save()
+    return redirect("/contacts")
+
+
 def search(request):
     filter = ProfileFilter(request.GET, queryset=Profile.objects.all())
     return render(request, 'search.html', {'filter': filter})
