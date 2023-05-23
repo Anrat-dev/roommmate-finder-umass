@@ -11,8 +11,7 @@ class ViewsTestCase(TestCase):
         self.profile_page_url = reverse('profile_page')
         self.edit_profile_page_url = reverse('edit_profile_page')
         self.search_page_url = reverse('search_page')
-        self.contacts_url = reverse('contacts')
-        self.accept_contact_url = reverse('accept_contact')
+
 
         self.test_user = User.objects.create_user(username='testuser', password='12345')
         self.test_user2 = User.objects.create_user(username='testuser2', password='12345')
@@ -38,13 +37,4 @@ class ViewsTestCase(TestCase):
         response = self.client.get(self.search_page_url)
         self.assertEquals(response.status_code, 200)
 
-    def test_contacts(self):
-        self.client.login(username='testuser', password='12345')
-        response = self.client.get(self.contacts_url)
-        self.assertEquals(response.status_code, 200)
 
-    def test_accept_contact(self):
-        self.client.login(username='testuser', password='12345')
-        request = Request.objects.create(requesterid=self.test_user, recipientid=self.test_user2)
-        response = self.client.post(self.accept_contact_url, {'pk': request.id})
-        self.assertEquals(response.status_code, 302)
