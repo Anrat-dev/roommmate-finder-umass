@@ -11,4 +11,6 @@ urlpatterns = [
     path('contacts/', views.contacts, name='contacts'),
     url(r'^contacts/(?P<pk>\d+)/$', views.contacts, name='contacts_with_pk'),
     path('search/', views.search, name='search'),
+    url(r'^accept_contact/(?P<pk>\d+)/$', views.accept_contact, name='accept_contact'),
+
 ]
