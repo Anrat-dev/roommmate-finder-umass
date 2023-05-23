@@ -1,6 +1,6 @@
 from django.test import SimpleTestCase
 from django.urls import reverse, resolve
-from ..views import home_page, profile_page, edit_profile_page, search_page, contacts, accept_contact, search
+from ..views import home_page, profile_page, edit_profile_page, search_page, search
 
 class TestUrls(SimpleTestCase):
 
