@@ -1,24 +1,22 @@
 from django.test import TestCase
 from django.contrib.auth.models import User
-from webappl.models import Profile, Request
+from ..models import Profile, Request
+import tempfile
 
-class ModelsTest(TestCase):
+
+class ProfileTestCase(TestCase):
     def setUp(self):
-        self.user1 = User.objects.create_user(
-            username='testuser1',
-            email='test1@example.com',
-            password='testpassword1'
-        )
-        self.user2 = User.objects.create_user(
-            username='testuser2',
-            email='test2@example.com',
-            password='testpassword2'
-        )
+        # Create a temporary image file
+        tmp_image = tempfile.NamedTemporaryFile(suffix=".jpg").name
 
-        self.profile1 = Profile.objects.create(
-            userid=self.user1,
+        # Create a test user
+        self.user = User.objects.create_user(username='testuser', password='12345')
+
+        # Create a test profile
+        self.profile = Profile.objects.create(
+            userid=self.user,
             phno='1234567890',
-            profile_picture=None,
+            profile_picture=tmp_image,
             gender='MALE',
             level_of_study='UG',
             year='FR',
@@ -32,22 +30,24 @@ class ModelsTest(TestCase):
             housing='HAVE'
         )
 
-        self.profile2 = Profile.objects.create(
-            userid=self.user2,
-            phno='0987654321',
-            profile_picture=None,
-            gender='FEMALE',
-            level_of_study='GA',
-            year='PHD',
-            college='ENG',
-            program='CS',
-            sleep_habit='NO',
-            cleanliness='DIRTY',
-            social_habit='YG',
-            duration='FOUR',
-            start_season='SUMMER',
-            housing='NEED'
-        )
+    def test_profile_creation(self):
+        self.assertTrue(isinstance(self.profile, Profile))
+        self.assertEqual(self.profile.__str__(), self.profile.userid.username)
+
+    def test_profile_update(self):
+        self.profile.gender = 'FEMALE'
+        self.profile.save()
+        self.assertEqual(Profile.objects.get(userid=self.user).gender, 'FEMALE')
+
+    def test_profile_delete(self):
+        self.profile.delete()
+        self.assertEqual(Profile.objects.filter(userid=self.user).count(), 0)
+
+
+class RequestTestCase(TestCase):
+    def setUp(self):
+        self.user1 = User.objects.create_user(username='testuser1', password='12345')
+        self.user2 = User.objects.create_user(username='testuser2', password='12345')
 
         self.request = Request.objects.create(
             requesterid=self.user1,
@@ -55,17 +55,15 @@ class ModelsTest(TestCase):
             status='pending'
         )
 
-    def test_profile_creation(self):
-        self.assertIsInstance(self.profile1, Profile)
-        self.assertIsInstance(self.profile2, Profile)
-
-    def test_profile_str(self):
-        self.assertEqual(str(self.profile1), self.user1.username)
-        self.assertEqual(str(self.profile2), self.user2.username)
-
     def test_request_creation(self):
-        self.assertIsInstance(self.request, Request)
+        self.assertTrue(isinstance(self.request, Request))
+        self.assertEqual(self.request.__str__(), f"requester: {self.request.requesterid}, recipient: {self.request.recipientid}, status: {self.request.status}")
 
-    def test_request_str(self):
-        expected_string = f"requester: {self.request.requesterid}, recipient: {self.request.recipientid}, status: {self.request.status}"
-        self.assertEqual(str(self.request), expected_string)
+    def test_request_update(self):
+        self.request.status = 'accepted'
+        self.request.save()
+        self.assertEqual(Request.objects.get(requesterid=self.user1, recipientid=self.user2).status, 'accepted')
+
+    def test_request_delete(self):
+        self.request.delete()
+        self.assertEqual(Request.objects.filter(requesterid=self.user1, recipientid=self.user2).count(), 0)

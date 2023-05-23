@@ -16,14 +16,14 @@
 <header id="header", style="padding-top: 80px; padding-bottom: 100px;">
     <div class="inner", style = "overflow-y: auto; text-align: left;">
         <header class="minor" style="margin-top: -0.4em;">
-            <h3>Filter Roommates</h3>
+            <h2>Filter Roommates</h2>
         </header>
         <hr class="solid">
         <div style="overflow-y: scroll; height:540px;">
             <form method="GET" class="my-lg-0">
                 {% for field in filter.form %}
                     <div class="form-group mb-3 mt-n1">
-                        <label style="color: white; font-size: 0.9em; margin-bottom: -2px;" class="text-left">{{ field.label }}</label>
+                        <label style="color: white; font-size: 0.95em; margin-bottom: -2px;" class="text-left">{{ field.label }}</label>
                         {{ field|add_class:"form-control form-control-sm mt-n1" }}
                     </div>
                 {% endfor %}

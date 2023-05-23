@@ -1,65 +1,50 @@
-from django.test import TestCase, Client, RequestFactory
+from django.test import TestCase, Client
+from django.urls import reverse
 from django.contrib.auth.models import User
-from webappl.models import Profile
-from views import home_page, profile_page, edit_profile_page, search_page
-from forms import ProfileForm
+from ..models import Profile, Request
 
-class ViewsTest(TestCase):
+class ViewsTestCase(TestCase):
+
     def setUp(self):
-        self.factory = RequestFactory()
-        self.user = User.objects.create_user(
-            username='testuser',
-            email='test@example.com',
-            password='testpassword'
-        )
-        self.profile = Profile.objects.create(
-            userid=self.user,
-            phno='1234567890',
-            gender='M',
-            level_of_study='UG',
-            year='1',
-            college='College1',
-            program='Program1',
-            sleep_habit='Early',
-            cleanliness='Clean',
-            social_habit='Social',
-            duration='1',
-            start_season='Fall',
-            housing='On-campus'
-        )
+        self.client = Client()
+        self.home_url = reverse('home_page')
+        self.profile_page_url = reverse('profile_page')
+        self.edit_profile_page_url = reverse('edit_profile_page')
+        self.search_page_url = reverse('search_page')
+        self.contacts_url = reverse('contacts')
+        self.accept_contact_url = reverse('accept_contact')
+
+        self.test_user = User.objects.create_user(username='testuser', password='12345')
+        self.test_user2 = User.objects.create_user(username='testuser2', password='12345')
+        self.test_user_profile = Profile.objects.create(userid=self.test_user)
+        self.test_user2_profile = Profile.objects.create(userid=self.test_user2)
 
     def test_home_page(self):
-        request = self.factory.get('/')
-        request.user = self.user
-
-        response = home_page(request)
-
-        self.assertEqual(response.status_code, 200)
-        self.assertContains(response, "Home Page")  # Assuming that your page has "Home Page"
+        response = self.client.get(self.home_url)
+        self.assertEquals(response.status_code, 200)
 
     def test_profile_page(self):
-        request = self.factory.get('/profile_page/')
-        request.user = self.user
-
-        response = profile_page(request)
-
-        self.assertEqual(response.status_code, 200)
-        # You can also check for user's details in the response
-
+        self.client.login(username='testuser', password='12345')
+        response = self.client.get(self.profile_page_url)
+        self.assertEquals(response.status_code, 200)
+    
     def test_edit_profile_page(self):
-        request = self.factory.get('/edit_profile_page/')
-        request.user = self.user
-
-        response = edit_profile_page(request)
-
-        self.assertEqual(response.status_code, 200)
-        self.assertIsInstance(response.context['form'], ProfileForm)
+        self.client.login(username='testuser', password='12345')
+        response = self.client.get(self.edit_profile_page_url)
+        self.assertEquals(response.status_code, 200)
 
     def test_search_page(self):
-        request = self.factory.get('/search_page/')
-        request.user = self.user
+        self.client.login(username='testuser', password='12345')
+        response = self.client.get(self.search_page_url)
+        self.assertEquals(response.status_code, 200)
 
-        response = search_page(request)
+    def test_contacts(self):
+        self.client.login(username='testuser', password='12345')
+        response = self.client.get(self.contacts_url)
+        self.assertEquals(response.status_code, 200)
 
-        self.assertEqual(response.status_code, 200)
-        # You can check if your scoring algorithm works by verifying that profiles are ordered as expected
+    def test_accept_contact(self):
+        self.client.login(username='testuser', password='12345')
+        request = Request.objects.create(requesterid=self.test_user, recipientid=self.test_user2)
+        response = self.client.post(self.accept_contact_url, {'pk': request.id})
+        self.assertEquals(response.status_code, 302)
