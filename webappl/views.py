@@ -1,8 +1,6 @@
 from django.shortcuts import render, redirect
-from filters import ProfileForm
+from .forms import ProfileForm
 from django.contrib.auth.models import User
-from django.db.models import Q
-
 
 # Create your views here.
 from django.shortcuts import render
@@ -109,9 +107,8 @@ def contacts(request, pk=None):
         contact_obj.save()
         return redirect("/search_page")
 
-    contact_list = Request.objects.filter(
-        Q(requesterid=request.user) | Q(recipientid=request.user)).distinct()
-    return render(request, 'webappl/contacts.html', {'contact_list': contact_list})
+    contact_list = Request.objects.filter(requesterid=request.user)
+    return render(request, 'webappl/contacts.html', {'contact_list':contact_list})
 
 def search(request):
     filter = ProfileFilter(request.GET, queryset=Profile.objects.all())
